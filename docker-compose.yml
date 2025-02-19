@@ -3,13 +3,15 @@ services:
     image: bitnami/postgresql
     ports:
       - '5432:5432'
+    container_name: pg-referralapi
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=nlwconnectapi
+      - POSTGRES_DB=pg-referralapi
 
   service-redis:
     image: bitnami/redis
+    container_name: redis-referralapi
     ports:
       - '6379:6379'
     environment:
