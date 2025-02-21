@@ -1,4 +1,5 @@
 import type { FastifyPluginAsyncZod } from 'fastify-type-provider-zod'
+import z from 'zod'
 import { getRanking } from '../functions/get-ranking'
 
 export const getRankingRoute: FastifyPluginAsyncZod = async app => {
@@ -8,17 +9,23 @@ export const getRankingRoute: FastifyPluginAsyncZod = async app => {
 			schema: {
 				summary: 'Get ranking',
 				tags: ['referral'],
-				// response: {
-				// 	200: z.object({
-				// 		count: z.number(),
-				// 	}),
-				// },
+				response: {
+					200: z.object({
+						ranking: z.array(
+							z.object({
+								id: z.string(),
+								name: z.string(),
+								score: z.number(),
+							})
+						),
+					}),
+				},
 			},
 		},
 		async request => {
-			await getRanking()
+			const { rankingWithScore } = await getRanking()
 
-			return { ok: 'ok' }
+			return { ranking: rankingWithScore }
 		}
 	)
 }
