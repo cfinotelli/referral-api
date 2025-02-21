@@ -49,6 +49,11 @@ app.register(getRankingRoute)
 
 app.listen({ port: PORT }).then(() => {
 	console.log(
-		`Http server running on port ${PORT}, Open Url: http://localhost:${PORT}`
+		`
+	Http server running on port ${PORT}
+
+	Oppen Docs in http://localhost:${PORT}/docs
+
+`
 	)
 })
